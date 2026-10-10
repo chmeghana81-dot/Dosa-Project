@@ -118,10 +118,24 @@ const Footer = () => {
 
       </div>
 
-      <div style={{ width: '100%', height: '1px', backgroundColor: 'var(--color-tiger-gold)', opacity: 0.2, marginTop: '80px', marginBottom: '30px' }}></div>
-
       {/* Bottom Bar */}
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', maxWidth: '1400px', margin: '0 auto', fontSize: '12px', color: '#A0B3A6' }}>
+      <div style={{ 
+        display: 'flex', 
+        justifyContent: 'space-between', 
+        alignItems: 'center', 
+        maxWidth: '1400px', 
+        margin: '80px auto 0', 
+        padding: '20px 40px',
+        backgroundColor: 'rgba(5, 20, 8, 0.8)',
+        backdropFilter: 'blur(10px)',
+        borderRadius: '20px',
+        border: '1px solid rgba(255, 193, 7, 0.15)',
+        boxShadow: '0 10px 30px rgba(0,0,0,0.3)',
+        fontSize: '12px', 
+        color: '#A0B3A6',
+        position: 'relative',
+        zIndex: 10
+      }}>
         
         <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
           <div style={{color: 'var(--color-tiger-gold)'}}>

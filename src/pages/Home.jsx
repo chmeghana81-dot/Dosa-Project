@@ -11,10 +11,10 @@ const Home = () => {
   });
 
   // Map scroll progress (0 to 1) to x, y, scale, and rotation values
-  const dosaX = useTransform(scrollYProgress, [0, 0.45, 1], ["15%", "-105%", "-105%"]);
-  const dosaY = useTransform(scrollYProgress, [0, 0.45, 1], ["0%", "-15%", "-15%"]);
+  const dosaX = useTransform(scrollYProgress, [0, 0.45, 1], ["5%", "-90%", "-90%"]);
+  const dosaY = useTransform(scrollYProgress, [0, 0.45, 1], ["20%", "5%", "5%"]);
   const dosaScale = useTransform(scrollYProgress, [0, 0.45, 1], [1, 0.85, 0.85]);
-  const dosaRotate = useTransform(scrollYProgress, [0, 0.45, 1], [0, -10, -10]);
+  const dosaRotate = useTransform(scrollYProgress, [0, 0.45, 1], [0, 0, 0]);
 
   return (
     <>
@@ -145,38 +145,93 @@ const Home = () => {
         <div className="dotted-divider"></div>
       </div>
 
-      <section className="poster-section" style={{textAlign: 'center', paddingBottom: '100px'}}>
+      <section className="poster-section" style={{textAlign: 'center', paddingBottom: '120px'}}>
         <h2 className="text-display" style={{fontSize: 'clamp(50px, 8vw, 100px)', marginBottom: '80px'}}>MUST TRY</h2>
-        <div style={{display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '40px', alignItems: 'center'}}>
+        
+        <div style={{display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '30px', alignItems: 'start', marginTop: '80px'}}>
           {[
-            { img: "/filtercoffe.png", title: "Filter Coffee", desc: "Aromatic & Strong" },
-            { img: "/thali.png", title: "South Thali", desc: "Authentic Meals" },
-            { img: "/dosaSecond.png", title: "Special Dosa", desc: "Crispy & Golden" },
-            { img: "/idli.png", title: "Soft Idli", desc: "Soft & Fluffy" },
+            { img: "/filtercoffe.png", title: "Filter Coffee", desc: "Aromatic & Strong", price: "₹ 90", text: "Authentic Kumbakonam degree coffee brewed fresh with pure cow's milk." },
+            { img: "/thali.png", title: "South Thali", desc: "Authentic Meals", price: "₹ 250", text: "A wholesome traditional meal served on a banana leaf with 12 delicious items." },
+            { img: "/dosaSecond.png", title: "Special Dosa", desc: "Crispy & Golden", price: "₹ 140", text: "Our signature crispy dosa stuffed with spicy potato masala and served with 3 chutneys." },
+            { img: "/idli.png", title: "Soft Idli", desc: "Soft & Fluffy", price: "₹ 80", text: "Melt-in-mouth steamed rice cakes served hot with sambar and fresh coconut chutney." },
           ].map((item, idx) => (
             <motion.div 
               key={idx}
-              whileHover={{ y: -15, scale: 1.02 }}
-              transition={{ type: "spring", stiffness: 300 }}
-              style={{ textAlign: 'center', cursor: 'pointer', padding: '10px', transition: 'all 0.3s ease' }}
+              whileHover={{ y: -15 }}
+              transition={{ type: "spring", stiffness: 300, damping: 20 }}
+              style={{ 
+                position: 'relative',
+                backgroundColor: 'rgba(10, 41, 17, 0.6)', 
+                backdropFilter: 'blur(10px)',
+                border: '1px solid rgba(255, 193, 7, 0.15)',
+                borderRadius: '24px',
+                padding: '0 30px 40px',
+                marginTop: '60px',
+                textAlign: 'center',
+                boxShadow: '0 20px 40px rgba(0,0,0,0.3)',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                height: '100%'
+              }}
             >
-              {/* Circular Background Wrapper */}
-              <div style={{ width: '240px', height: '240px', borderRadius: '50%', backgroundColor: '#185926', margin: '0 auto 30px', display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative' }}>
-                <img src={item.img} alt={item.title} style={{width: '120%', height: '120%', objectFit: 'contain', filter: 'drop-shadow(0 20px 30px rgba(0,0,0,0.7))', position: 'absolute' }} />
+              {/* Image bursting out */}
+              <div style={{ 
+                width: '180px', height: '180px', 
+                borderRadius: '50%', 
+                backgroundColor: 'var(--color-ember-rust)', 
+                marginTop: '-60px',
+                marginBottom: '25px',
+                display: 'flex', alignItems: 'center', justifyContent: 'center', 
+                position: 'relative',
+                boxShadow: '0 15px 30px rgba(0,0,0,0.5), inset 0 0 20px rgba(255,193,7,0.1)',
+                border: '4px solid rgba(10, 41, 17, 1)'
+              }}>
+                <motion.img 
+                  whileHover={{ scale: 1.1, rotate: 5 }}
+                  transition={{ type: "spring", stiffness: 200 }}
+                  src={item.img} 
+                  alt={item.title} 
+                  style={{width: '125%', height: '125%', objectFit: 'contain', filter: 'drop-shadow(0 20px 20px rgba(0,0,0,0.6))', position: 'absolute' }} 
+                />
               </div>
               
-              <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: '28px', color: '#FFFFFF', marginBottom: '12px', fontWeight: '600' }}>
+              <div style={{ color: 'var(--color-tiger-gold)', fontFamily: "'Antonio', sans-serif", fontSize: '26px', fontWeight: '700', marginBottom: '15px', letterSpacing: '0.05em' }}>
+                {item.price}
+              </div>
+              
+              <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: '30px', color: '#FFFFFF', marginBottom: '10px', fontWeight: '600' }}>
                 {item.title}
               </h3>
               
-              <p style={{ fontFamily: "system-ui, sans-serif", color: 'var(--color-tiger-gold)', fontSize: '12px', letterSpacing: '0.15em', textTransform: 'uppercase', fontWeight: '500' }}>
+              <p style={{ fontFamily: "system-ui, sans-serif", color: 'var(--color-tiger-gold)', fontSize: '11px', letterSpacing: '0.2em', textTransform: 'uppercase', fontWeight: '600', marginBottom: '16px' }}>
                 {item.desc}
               </p>
               
-              {/* Arrow Button */}
-              <div style={{ width: '36px', height: '36px', border: '1px solid var(--color-tiger-gold)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '24px auto 0', color: 'var(--color-tiger-gold)', fontSize: '18px', transition: 'all 0.3s ease' }} className="card-arrow">
-                →
-              </div>
+              <p style={{ fontFamily: "'Inter', sans-serif", color: '#A0B3A6', fontSize: '14px', lineHeight: '1.6', marginBottom: '30px' }}>
+                {item.text}
+              </p>
+              
+              <button 
+                style={{ 
+                  marginTop: 'auto',
+                  backgroundColor: 'transparent',
+                  border: '1px solid var(--color-tiger-gold)',
+                  color: 'var(--color-tiger-gold)',
+                  borderRadius: '30px',
+                  padding: '12px 28px',
+                  fontSize: '12px',
+                  fontWeight: '600',
+                  letterSpacing: '0.1em',
+                  cursor: 'pointer',
+                  transition: 'all 0.3s ease',
+                  textTransform: 'uppercase'
+                }}
+                onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = 'var(--color-tiger-gold)'; e.currentTarget.style.color = '#000'; }}
+                onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = 'transparent'; e.currentTarget.style.color = 'var(--color-tiger-gold)'; }}
+              >
+                Add to Order
+              </button>
             </motion.div>
           ))}
         </div>
